@@ -69,8 +69,7 @@ if prompt := st.chat_input():
     st.chat_message("human").write(prompt)
 
     #Messages are saved to history automatically by Langchain during run
-    output = qa.invoke({'query':prompt})
-    #output = qa.invoke({'question':prompt, 'chat_history':memory.load_memory_variables({})})
+    output = qa.invoke({'question':prompt, 'chat_history':memory.load_memory_variables({})})
     
     #display the output
     st.chat_message("ai").write(output['answer'])
