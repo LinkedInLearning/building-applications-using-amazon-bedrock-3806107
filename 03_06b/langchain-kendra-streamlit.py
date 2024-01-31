@@ -13,6 +13,7 @@ st.set_page_config(page_title="Employee HR Bot", page_icon="📖")
 st.title("📖 Employee HR Bot")
 
 #Define the retriever
+retriever = {}
 
 #Define model parameters
 model_kwargs = {"temperature": 0, "top_k": 10, "max_tokens_to_sample": 3000}
@@ -65,8 +66,7 @@ if prompt := st.chat_input():
     st.chat_message("human").write(prompt)
 
     #Messages are saved to history automatically by Langchain during run
-    output = qa.invoke({'query':prompt})
-    #output = qa.invoke({'question':prompt, 'chat_history':memory.load_memory_variables({})})
+    output = qa.invoke({'question':prompt, 'chat_history':memory.load_memory_variables({})})
     
     #display the output
     st.chat_message("ai").write(output['answer'])
