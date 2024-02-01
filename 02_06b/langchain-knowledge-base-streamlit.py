@@ -2,10 +2,6 @@
 from langchain.chains import RetrievalQA
 from langchain_community.llms import Bedrock
 from langchain_community.retrievers import AmazonKnowledgeBasesRetriever
-import streamlit as st
-from langchain.memory import ConversationBufferMemory
-from langchain_community.chat_message_histories import StreamlitChatMessageHistory
-from langchain.prompts.prompt import PromptTemplate
 
 #Configure streamlit app
 
