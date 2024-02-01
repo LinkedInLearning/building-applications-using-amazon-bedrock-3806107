@@ -12,7 +12,7 @@ st.title("Employee HR Bot")
 
 #Define the retriever
 retriever = AmazonKnowledgeBasesRetriever(
-    knowledge_base_id="P4P5UVX2UB",
+    knowledge_base_id="",
     retrieval_config={"vectorSearchConfiguration": {"numberOfResults": 4}},
 )
 
