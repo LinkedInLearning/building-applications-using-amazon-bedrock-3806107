@@ -53,7 +53,7 @@
       "put": {
         "summary": "Deducts the specified pto or paid time off for an employee",
         "description": "Deducts the balance of number of days pto that an employee has. Returns the number of pto days left.",
-        "operationId": "getEmployeePTO",
+        "operationId": "updateEmployeePTO",
         "parameters": [
           {
             "name": "employee_id",
