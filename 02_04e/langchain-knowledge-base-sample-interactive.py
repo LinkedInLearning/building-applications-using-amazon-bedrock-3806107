@@ -5,27 +5,33 @@ from langchain_community.retrievers import AmazonKnowledgeBasesRetriever
 
 #Define the retriever
 retriever = AmazonKnowledgeBasesRetriever(
-    knowledge_base_id="",
-    retrieval_config={"vectorSearchConfiguration": {"numberOfResults": 4}},
+  knowledge_base_id= "TUO4HPW63P",
+  retrieval_config= {"vectorSearchConfiguration" : {"numberOfResults": 4}}
 )
 
 #Define model parameters
-model_kwargs_claude = {"temperature": 0, "top_k": 10, "max_tokens_to_sample": 750}
+model_kwargs_claude = {
+  "temperature" : 0,
+  "top_k" : 10,
+  "max_tokens_to_sample" : 750
+}
 
 #Configure llm
-llm = Bedrock(model_id="anthropic.claude-instant-v1", model_kwargs=model_kwargs_claude)
+llm = Bedrock (model_id = "anthropic.claude-instant-v1", model_kwargs = model_kwargs_claude )
 
 #Configure the chain
 qa = RetrievalQA.from_chain_type(
-    llm=llm, retriever=retriever, return_source_documents=True
+  llm = llm,
+  retriever = retriever,
+  return_source_documents = True
 )
 
 #Get user input and display the result
 while True:
-    query = input("\nAsk a question:\n")
+  query = input("\nAsk a question:\n")
 
-    #invoke the model
-    output = qa.invoke(query)
+  #invoke the model
+  output = qa.invoke (query)
 
-    #display the output
-    print (output['result'])
+  #display the result
+  print (output['result'])
