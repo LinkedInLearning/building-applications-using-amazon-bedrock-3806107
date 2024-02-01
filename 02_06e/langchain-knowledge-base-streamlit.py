@@ -40,30 +40,9 @@ Question: {question}
 Helpful Answer:"""  
 
 #Configure prompt template
-prompt_template = PromptTemplate.from_template(my_template)
 
 #Configure the chain
-qa = RetrievalQA.from_chain_type(
-  llm = llm,
-  chain_type="stuff",
-  retriever = retriever,
-  return_source_documents = True,
-  chain_type_kwargs= {"prompt" : prompt_template}
-)
 
 #Render current messages from StreamlitChatMessageHistory
-for msg in msgs.messages:
-  st.chat_message(msg.type).write(msg.content)
 
 #If user inputs a new prompt, generate and draw a new response
-if prompt := st.chat_input():
-  st.chat_message("human").write(prompt)
-
-  output = qa.invoke({'query':prompt})
-
-  #adding messages to memory
-  memory.chat_memory.add_user_message(prompt)
-  memory.chat_memory.add_ai_message(output['result'])
-
-  #display the output
-  st.chat_message("ai").write(output['result'])
