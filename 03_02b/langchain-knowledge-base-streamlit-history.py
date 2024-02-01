@@ -62,7 +62,7 @@ if prompt := st.chat_input():
   st.chat_message("human").write(prompt)
 
   #Invoke the model
-  
+  output = ""
     
   #display the output
   st.chat_message("ai").write(output['answer'])  
