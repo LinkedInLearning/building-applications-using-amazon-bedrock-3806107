@@ -37,7 +37,7 @@
                       "pto_balance": {
                         "type": "integer",
                         "description": "Number of days pto remaining"
-                      },
+                      }
                     }
                 }
               }
