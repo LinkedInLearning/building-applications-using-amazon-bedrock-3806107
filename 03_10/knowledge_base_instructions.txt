@@ -1,0 +1,1 @@
+General questions about HR policies will come from the knowledge base. The agent will handle specific information about time off balances and requests to take time off.
