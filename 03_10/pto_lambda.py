@@ -7,8 +7,7 @@ def get_pto(employee_id):
 
 #update employee pto
 def update_pto(employee_id, pto_days):
-    pto_limits = {'123': 55, '456': 20}
-    total_pto = pto_limits.get(employee_id, -1)
+    total_pto = get_pto(employee_id)
     
     if total_pto != -1:
         # Update the pto
