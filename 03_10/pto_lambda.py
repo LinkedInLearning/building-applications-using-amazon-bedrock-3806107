@@ -51,9 +51,14 @@ def handle_api_request(action, api_path, http_method, parameters):
     result_payload = {}
 
     if api_path == '/employeepto/{employee_id}':
-        employee_id, balance = handle_employeepto_get(parameters, http_method)
+        employee_id = get_parameter_value(parameters, 'employee_id')
+        if http_method.lower() == 'get':
+            balance = get_pto(employee_id)
     elif api_path == '/employeepto/{employee_id}/{pto_days}':
-        employee_id, pto_days, balance = handle_employeepto_put(parameters, http_method)
+        employee_id = get_parameter_value(parameters, 'employee_id')
+        pto_days = get_parameter_value(parameters, 'pto_days')
+        if http_method.lower() == 'put':
+            balance = update_pto(employee_id, int(pto_days))
     else:
         result_payload = {"error": "{}::{} is not a valid api, try another one.".format(action, api_path)}
 
@@ -70,23 +75,6 @@ def handle_api_request(action, api_path, http_method, parameters):
         }
 
     return result_payload
-
-#process get requests
-def handle_employeepto_get(parameters, http_method):
-    employee_id = get_parameter_value(parameters, 'employee_id')
-    balance = 0
-    if http_method.lower() == 'get':
-        balance = get_pto(employee_id)
-    return employee_id, balance
-
-#process put / update requests
-def handle_employeepto_put(parameters, http_method):
-    employee_id = get_parameter_value(parameters, 'employee_id')
-    pto_days = get_parameter_value(parameters, 'pto_days')
-    balance = 0
-    if http_method.lower() == 'put':
-        balance = update_pto(employee_id, int(pto_days))
-    return employee_id, pto_days, balance
 
 #convenience function to retrieve parameter values
 def get_parameter_value(parameters, key):
