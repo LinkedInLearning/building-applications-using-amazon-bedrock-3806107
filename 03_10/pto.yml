@@ -1,0 +1,105 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Paid Time Off API",
+    "version": "1.0.0",
+    "description": "APIs for managing requests for time off from employees including asking for balances and requesting time off."
+  },
+  "paths": {
+    "/employeepto/{employee_id}": {
+      "get": {
+        "summary": "Gets the the balance of pto or paid time off for an employee",
+        "description": "Gets the balance of number of days pto that an employee has. Returns the number of pto days available.",
+        "operationId": "getEmployeePTO",
+        "parameters": [
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "Unique ID of the employee",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "Gets the remainder of PTO days for an employee",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                      "employee_id": {
+                        "type": "string",
+                        "description": "Unique ID for an employee"
+                      },
+                      "pto_balance": {
+                        "type": "integer",
+                        "description": "Number of days pto remaining"
+                      }
+                    }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request. One or more required fields are missing or invalid."
+          }
+        }
+      }
+    },
+    "/employeepto/{employee_id}/{pto_days}": {
+      "put": {
+        "summary": "Deducts the specified pto or paid time off for an employee",
+        "description": "Deducts the balance of number of days pto that an employee has. Returns the number of pto days left.",
+        "operationId": "updateEmployeePTO",
+        "parameters": [
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "Unique ID of the employee",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pto_days",
+            "in": "path",
+            "description": "PTO to deduct from employee",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }          
+        ],        
+        "responses": {
+          "200": {
+            "description": "Deducts the number of PTO days specified for an employee",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                      "employee_id": {
+                        "type": "string",
+                        "description": "Unique ID for an employee"
+                      },
+                      "pto_balance": {
+                        "type": "integer",
+                        "description": "Number of days pto remaining"
+                      }
+                    }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request. One or more required fields are missing or invalid."
+          }
+        }
+      }
+    }
+  }
+}
